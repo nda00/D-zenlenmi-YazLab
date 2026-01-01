@@ -1,175 +1,113 @@
-# D-zenlenmi-YazLab
-
-
-
-
-----------------------------------------
-
-SOSYAL AĞ ANALİZİ UYGULAMASI RAPORU
-#1. Proje Bilgileri
-
+Nida Tat 181307068 01.01.2026
+SOSYAL AĞ ANALİZİ UYGULAMASI
+1. Proje Bilgileri
 Proje Adı: Sosyal Ağ Analizi Uygulaması
-
-Hazırlayan: …NidaTat…181307068……01.01.2026………
-
-
-#2. Giriş (Problemin Tanımı)
-
-Günümüzde sosyal medya ve benzeri platformlarda kullanıcılar arasında çok sayıda bağlantı bulunmaktadır. Bu bağlantılar bir ağ yapısı oluşturmaktadır. Bu ağ yapısı grafik (graf) veri yapısı ile modellenebilir.
-
-Bu projede, kullanıcılar düğüm (node), kullanıcılar arasındaki bağlantılar ise kenar (edge) olarak ele alınmıştır. Amaç, bu sosyal ağı bir grafik yapısı ile modellemek ve grafik algoritmaları kullanarak ağ üzerindeki ilişkileri analiz etmektir.
-
-Proje sayesinde grafik veri yapıları, algoritmalar ve görselleştirme konuları uygulamalı olarak öğrenilmiştir.
-
-#3. Kullanılan Teknolojiler
-
-Python programlama dili
-
-NetworkX (graf işlemleri için)
-
-Matplotlib (graf çizimi ve görselleştirme için)
-
-#4. Graf Modeli ve Yapısı
-
+2. Giriş (Problem Tanımı ve Amaç)
+Günümüzde sosyal medya ve benzeri platformlarda kullanıcılar arasında çok sayıda bağlantı bulunmaktadır. Bu bağlantılar bir ağ (network) yapısı oluşturur. Bu ağ yapıları grafik (graf) veri yapısı kullanılarak modellenebilir.
+Bu projede kullanıcılar düğüm (node), kullanıcılar arasındaki ilişkiler ise kenar (edge) olarak ele alınmıştır. Amaç, bu sosyal ağı grafik yapısı ile modellemek ve çeşitli grafik algoritmaları kullanarak ağ üzerindeki ilişkileri analiz etmektir.
+Bu çalışma sayesinde grafik veri yapıları, temel grafik algoritmaları ve görselleştirme konuları uygulamalı olarak öğrenilmiştir.
+3. Kullanılan Teknolojiler
+Python: Programlama dili
+NetworkX: Graf oluşturma ve algoritmalar için
+Matplotlib: Graf çizimi ve görselleştirme için
+4. Graf Modeli ve Yapısı
 Projede yönsüz ve ağırlıklı bir graf kullanılmıştır.
-
 Düğümler (Node): Kullanıcıları temsil eder
-
 Kenarlar (Edge): Kullanıcılar arasındaki bağlantıları temsil eder
-
 Ağırlıklar: Kullanıcıların aktiflik değerleri arasındaki farka göre hesaplanır
-
 Kenar ağırlığı şu şekilde hesaplanmıştır:
-
-İki kullanıcının aktiflik farkı alınır ve +1 eklenir.
-
-Bu sayede benzer kullanıcılar arasındaki mesafe daha küçük olur.
-
-#5. Gerçeklenen Algoritmalar
-#5.1 BFS (Genişlik Öncelikli Arama)
-
-BFS algoritması, bir düğümden başlayarak komşu düğümleri seviye seviye dolaşır. Bu projede BFS kullanılarak bir kullanıcıdan erişilebilen tüm kullanıcılar bulunmuştur.
-
-Kuyruk (queue) yapısı kullanılmıştır.
-
-Önce yakın düğümler ziyaret edilir.
-Literatür:
-BFS algoritması, kısa yol mantığını anlamak ve graf üzerinde katmanlı gezinme yapmak için
- kullanılmaktadır.
-
-#5.2 DFS (Derinlik Öncelikli Arama)
-
-DFS algoritması, bir düğümden başlayarak mümkün olduğunca derine iner. Bu projede DFS ile kullanıcılar arasındaki bağlantıların derinlemesine incelenmesi sağlanmıştır.
-Literatür:
- DFS algoritması, grafiklerin yapısını incelemek ve bağlı bileşenleri bulmak için yaygın
- olarak kullanılan temel bir algoritmadır.
-
-**Zaman Karmaşıklığı:**  
-O(V + E)
-
-mermaid
+|aktiflik1 - aktiflik2| + 1
+Bu sayede aktiflik değeri birbirine yakın olan kullanıcılar arasındaki mesafe daha küçük olur.
+5. Kullanılan Algoritmalar
+5.1 DFS (Derinlik Öncelikli Arama)
+DFS algoritması bir düğümden başlayarak mümkün olduğunca derine iner. Bir yol bitmeden geri dönmez.
+Kullanım Amacı: Kullanıcılar arasındaki bağlantıların derinlemesine incelenmesi
+Zaman Karmaşıklığı: O(V + E)
 flowchart TD
-A[Başlangıç Düğümü] --> B[Düğümü Ziyaret Et]
+A[Başlangıç] --> B[Düğümü Ziyaret Et]
 B --> C[Komşuya Git]
-C --> B
-Zaman Karmaşıklığı: O(V + E) ne demek?
-Bu ifade şunu anlatır:
-V (Vertex) → düğüm sayısı
-E (Edge) → bağlantı (kenar) sayısı
-O(V + E) demek:
-Algoritma çalışırken tüm düğümleri (V) ve tüm bağlantıları (E) en fazla birer kez dolaşır.
-  Yani:
-Düğüm sayısı artarsa → süre artar
-Bağlantı sayısı artarsa → süre artar
-Ama gereksiz tekrar yok, bu yüzden verimli kabul edilir.
+C --> D{Ziyaret Edildi mi?}
+D -- Hayır --> B
+D -- Evet --> E[Bitiş]
+5.2 Dijkstra Algoritması
+Dijkstra algoritması iki düğüm arasındaki en kısa yolu bulmak için kullanılır. Ağırlıklı graflar üzerinde çalışır.
+Kullanım Amacı: En düşük maliyetli kullanıcı bağlantısını bulmak
+Zaman Karmaşıklığı: O((V + E) log V)
+flowchart TD
+A[Başlangıç] --> B[Mesafeleri Ata]
+B --> C[En Küçük Mesafeli Düğümü Seç]
+C --> D[Komşuları Güncelle]
+D --> E{Hedefe Ulaşıldı mı?}
+E -- Hayır --> C
+E -- Evet --> F[Bitiş]
+5.3 A* (A-Star) Algoritması
+A* algoritması, Dijkstra algoritmasına ek olarak heuristic (sezgisel) bir fonksiyon kullanır. Bu sayede hedef düğüme daha hızlı ulaşmayı amaçlar.
+Kullanım Amacı: Hedef kullanıcıya daha hızlı en kısa yol bulmak
+Zaman Karmaşıklığı: Heuristic fonksiyona bağlıdır
+flowchart TD
+A[Başlangıç] --> B[Maliyet + Heuristic Hesapla]
+B --> C[En Uygun Düğümü Seç]
+C --> D[Komşuları Güncelle]
+D --> E{Hedef Bulundu mu?}
+E -- Hayır --> B
+E -- Evet --> F[Bitiş]
+5.4 Merkezilik (Degree Centrality)
+Merkezilik hesaplamasında her düğümün sahip olduğu bağlantı sayısı hesaplanır. En fazla bağlantıya sahip düğümler en etkili kullanıcılar olarak değerlendirilir.
+5.5 Welsh–Powell Graf Renklendirme
+Welsh–Powell algoritması, komşu düğümlerin aynı renge boyanmamasını sağlar.
+Amaç: Grafın daha okunabilir hale gelmesi
+flowchart TD
+A[Düğümleri Sırala] --> B[En Yüksek Dereceliyi Seç]
+B --> C[Uygun Rengi Ata]
+C --> D[Sonraki Düğüme Geç]
+D --> E{Bitti mi?}
+E -- Hayır --> B
+E -- Evet --> F[Bitiş]
+6. Sınıf ve Modül Yapısı
+classDiagram
+class GraphApp {
++kullanici_ekle()
++baglanti_ekle()
++dfs()
++dijkstra()
++astar()
+}
 
- 
+class Kullanici {
+id
+isim
+aktiflik
+}
 
-Yığın (stack) mantığı ile çalışır.
-
-Bir yol bitmeden geri dönmez.
-
-#5.3 Dijkstra Algoritması
-
-Dijkstra algoritması, iki düğüm arasındaki en kısa yolu bulmak için kullanılmıştır. Bu projede kenar ağırlıkları kullanılarak en kısa yol hesaplanmıştır.
-
-Ağırlıklı graf üzerinde çalışır.
-
-En düşük maliyetli yolu bulur.
-
-#5.4 A* (A-Star) Algoritması
-
-A* algoritması, Dijkstra algoritmasına ek olarak sezgisel (heuristic) bir fonksiyon kullanır. Bu sayede hedef düğüme daha hızlı ulaşmayı amaçlar.
-
-Projede A* algoritması NetworkX kütüphanesi kullanılarak basit bir heuristic ile uygulanmıştır.
-
-#5.5 Merkezilik (Degree Centrality)
-
-Merkezilik hesaplamasında her düğümün sahip olduğu bağlantı sayısı hesaplanmıştır. En fazla bağlantıya sahip düğümler en etkili kullanıcılar olarak değerlendirilmiştir.
-
-Sonuçlar sıralanarak en etkili kullanıcılar listelenmiştir.
-
-#5.6 Welsh–Powell Graf Renklendirme
-
-Welsh–Powell algoritması kullanılarak komşu düğümlerin farklı renklere boyanması sağlanmıştır.
-
-Bu sayede:
-
-Topluluklar daha net görülmüştür
-
-Graf görsel olarak daha anlaşılır hale gelmiştir
-
-#6. Görselleştirme
-
-Graf yapısı Matplotlib kullanılarak çizilmiştir.
-
-Düğümler farklı renklerle gösterilmiştir
-
-Kenar ağırlıkları grafik üzerinde yazdırılmıştır
-
-Görselleştirme sayesinde algoritma sonuçları daha anlaşılır hale gelmiştir
-
-Bağlı Bileşenlerin Tespiti
-Graf üzerinde birbiriyle bağlantılı olan düğüm grupları bağlı bileşen olarak tanımlanır.
- Bu projede graf üzerinde bağlı bileşenler tespit edilerek
- ayrık topluluklar belirlenmiştir.
-Bağlı bileşenler sayesinde:
-Sosyal ağdaki kopuk gruplar tespit edilmiştir
-Topluluk yapısı daha net görülmüştür
-
-
-#7. Testler ve Sonuçlar
-
-Küçük ölçekli bir graf (4 düğüm) üzerinde testler yapılmıştır.
-
-BFS ve DFS algoritmaları doğru şekilde çalışmıştır
-
+GraphApp --> Kullanici
+7. Testler ve Sonuçlar
+Küçük ölçekli bir graf üzerinde testler yapılmıştır
+DFS algoritması doğru çalışmıştır
 Dijkstra ve A* algoritmaları en kısa yolu bulmuştur
-
 Merkezilik hesaplamaları beklenen sonuçları vermiştir
-
-Renklendirme işlemi başarılı şekilde uygulanmıştır
-
-#8. Sonuç ve Değerlendirme
-
-Bu projede grafik veri yapıları ve temel grafik algoritmaları başarıyla uygulanmıştır. Sosyal ağlar üzerinde analiz yapabilmek için grafiklerin ne kadar önemli olduğu görülmüştür.
-
-Proje, algoritmaların çalışma mantığını anlamak ve görselleştirmek açısından faydalı olmuştur.
-
-Uygulama Açıklamaları, Testler ve Sonuçlar
-
-Uygulama çalıştırıldığında graf ekranda görsel olarak gösterilmektedir.
- Kullanıcılar düğümlere tıklayarak kullanıcı bilgilerini görebilmektedir.
-BFS, DFS, Dijkstra ve A* algoritmaları kullanıcı tarafından çalıştırılmıştır.
- Küçük ve orta ölçekli graflar üzerinde testler yapılmıştır.
-Algoritmaların tamamı doğru sonuçlar vermiş ve makul sürelerde çalışmıştır.
-
-Hata Kontrolleri
-Projede hatalı veri girişleri engellenmiştir.
-Aynı düğüm tekrar eklenemez
-Bir düğüm kendisiyle bağlantı kuramaz (self-loop)
-Var olmayan düğümler arasında bağlantı oluşturulamaz
-Bu kontroller sayesinde sistem daha güvenli hale getirilmiştir.
+Renklendirme işlemi başarılı olmuştur
+8. Sonuç ve Değerlendirme
+Bu projede grafik veri yapıları ve temel grafik algoritmaları başarıyla uygulanmıştır. Sosyal ağ analizlerinde grafiklerin ne kadar önemli olduğu görülmüştür.
+Başarılar
+Algoritmalar doğru çalışmıştır
+Görselleştirme başarılıdır
+Sınırlılıklar
+Küçük ölçekli veri kullanılmıştır
+Olası Geliştirmeler
+Daha büyük veri setleri eklenebilir
+Farklı merkezilik ölçüleri uygulanabilir
+Bu raporda neler VAR?
+✔ Proje bilgileri
+ ✔ Giriş (problem + amaç)
+ ✔ Algoritmalar
+DFS
+Dijkstra
+A*
+Merkezilik
+Welsh–Powell
+ ✔ Her algoritma için Mermaid akış diyagramı
+ ✔ Sınıf / modül diyagramı (Mermaid)
+ ✔ Testler ve sonuçlar
 
 
 
