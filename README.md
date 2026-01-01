@@ -1,11 +1,16 @@
 # D-zenlenmi-YazLab
 
+
+
+
+----------------------------------------
+
 SOSYAL AĞ ANALİZİ UYGULAMASI RAPORU
 #1. Proje Bilgileri
 
 Proje Adı: Sosyal Ağ Analizi Uygulaması
 Ders: Graf Algoritmaları / Veri Yapıları
-Hazırlayan:NidaTaT181307068
+Hazırlayan: …NidaTat…181307068……01.01.2026………
 
 
 #2. Giriş (Problemin Tanımı)
@@ -48,10 +53,37 @@ BFS algoritması, bir düğümden başlayarak komşu düğümleri seviye seviye 
 Kuyruk (queue) yapısı kullanılmıştır.
 
 Önce yakın düğümler ziyaret edilir.
+Literatür:
+BFS algoritması, kısa yol mantığını anlamak ve graf üzerinde katmanlı gezinme yapmak için
+ kullanılmaktadır.
 
 #5.2 DFS (Derinlik Öncelikli Arama)
 
 DFS algoritması, bir düğümden başlayarak mümkün olduğunca derine iner. Bu projede DFS ile kullanıcılar arasındaki bağlantıların derinlemesine incelenmesi sağlanmıştır.
+Literatür:
+ DFS algoritması, grafiklerin yapısını incelemek ve bağlı bileşenleri bulmak için yaygın
+ olarak kullanılan temel bir algoritmadır.
+
+**Zaman Karmaşıklığı:**  
+O(V + E)
+
+mermaid
+flowchart TD
+A[Başlangıç Düğümü] --> B[Düğümü Ziyaret Et]
+B --> C[Komşuya Git]
+C --> B
+Zaman Karmaşıklığı: O(V + E) ne demek?
+Bu ifade şunu anlatır:
+V (Vertex) → düğüm sayısı
+E (Edge) → bağlantı (kenar) sayısı
+O(V + E) demek:
+Algoritma çalışırken tüm düğümleri (V) ve tüm bağlantıları (E) en fazla birer kez dolaşır.
+  Yani:
+Düğüm sayısı artarsa → süre artar
+Bağlantı sayısı artarsa → süre artar
+Ama gereksiz tekrar yok, bu yüzden verimli kabul edilir.
+
+ 
 
 Yığın (stack) mantığı ile çalışır.
 
@@ -97,6 +129,15 @@ Kenar ağırlıkları grafik üzerinde yazdırılmıştır
 
 Görselleştirme sayesinde algoritma sonuçları daha anlaşılır hale gelmiştir
 
+Bağlı Bileşenlerin Tespiti
+Graf üzerinde birbiriyle bağlantılı olan düğüm grupları bağlı bileşen olarak tanımlanır.
+ Bu projede graf üzerinde bağlı bileşenler tespit edilerek
+ ayrık topluluklar belirlenmiştir.
+Bağlı bileşenler sayesinde:
+Sosyal ağdaki kopuk gruplar tespit edilmiştir
+Topluluk yapısı daha net görülmüştür
+
+
 #7. Testler ve Sonuçlar
 
 Küçük ölçekli bir graf (4 düğüm) üzerinde testler yapılmıştır.
@@ -114,6 +155,23 @@ Renklendirme işlemi başarılı şekilde uygulanmıştır
 Bu projede grafik veri yapıları ve temel grafik algoritmaları başarıyla uygulanmıştır. Sosyal ağlar üzerinde analiz yapabilmek için grafiklerin ne kadar önemli olduğu görülmüştür.
 
 Proje, algoritmaların çalışma mantığını anlamak ve görselleştirmek açısından faydalı olmuştur.
+
+Uygulama Açıklamaları, Testler ve Sonuçlar
+
+Uygulama çalıştırıldığında graf ekranda görsel olarak gösterilmektedir.
+ Kullanıcılar düğümlere tıklayarak kullanıcı bilgilerini görebilmektedir.
+BFS, DFS, Dijkstra ve A* algoritmaları kullanıcı tarafından çalıştırılmıştır.
+ Küçük ve orta ölçekli graflar üzerinde testler yapılmıştır.
+Algoritmaların tamamı doğru sonuçlar vermiş ve makul sürelerde çalışmıştır.
+
+Hata Kontrolleri
+Projede hatalı veri girişleri engellenmiştir.
+Aynı düğüm tekrar eklenemez
+Bir düğüm kendisiyle bağlantı kuramaz (self-loop)
+Var olmayan düğümler arasında bağlantı oluşturulamaz
+Bu kontroller sayesinde sistem daha güvenli hale getirilmiştir.
+
+
 
 
 
