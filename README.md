@@ -9,7 +9,7 @@ SOSYAL AĞ ANALİZİ UYGULAMASI RAPORU
 #1. Proje Bilgileri
 
 Proje Adı: Sosyal Ağ Analizi Uygulaması
-Ders: Graf Algoritmaları / Veri Yapıları
+
 Hazırlayan: …NidaTat…181307068……01.01.2026………
 
 
